@@ -1332,7 +1332,12 @@ gpm_manager_engine_charge_low_cb (GpmEngine *engine, UpDevice *device, GpmManage
 		message = g_strdup_printf (_("Wireless mouse is low in power (%.0f%%)"), percentage);
 
 	} else if (kind == UP_DEVICE_KIND_KEYBOARD) {
-		/* TRANSLATORS: keyboard is getting a little low */
+		gboolean notify = g_settings_get_boolean (manager->priv->settings,
+				GPM_SETTINGS_NOTIFY_LOW_CAPACITY_KEYBOARD);
+		if(!notify)
+			goto out;
+
+				/* TRANSLATORS: keyboard is getting a little low */
 		title = _("Keyboard battery low");
 
 		/* TRANSLATORS: tell user more details */
@@ -1472,6 +1477,11 @@ gpm_manager_engine_charge_critical_cb (GpmEngine *engine, UpDevice *device, GpmM
 					     "This device will soon stop functioning if not charged."),
 					   percentage);
 	} else if (kind == UP_DEVICE_KIND_KEYBOARD) {
+		gboolean notify = g_settings_get_boolean (manager->priv->settings,
+				GPM_SETTINGS_NOTIFY_LOW_CAPACITY_KEYBOARD);
+		if(!notify)
+			goto out;
+
 		/* TRANSLATORS: the keyboard battery is very low */
 		title = _("Keyboard battery low");
 
