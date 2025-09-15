@@ -1472,6 +1472,11 @@ gpm_manager_engine_charge_critical_cb (GpmEngine *engine, UpDevice *device, GpmM
 					     "This device will soon stop functioning if not charged."),
 					   percentage);
 	} else if (kind == UP_DEVICE_KIND_KEYBOARD) {
+		gboolean notify = g_settings_get_boolean (manager->priv->settings,
+				GPM_SETTINGS_NOTIFY_LOW_CAPACITY_KEYBOARD);
+		if(!notify)
+			goto out;
+
 		/* TRANSLATORS: the keyboard battery is very low */
 		title = _("Keyboard battery low");
 
