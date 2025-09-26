@@ -226,6 +226,11 @@
       <summary>Notify on low capacity of mouse battery</summary>
       <description>If a notification message should be displayed when the battery is getting low.</description>
     </key>
+    <key name="notify-low-capacity-keyboard" type="b">
+      <default>false</default>
+      <summary>Notify on low capacity of keyboard battery</summary>
+      <description>If a notification message should be displayed when the battery is getting low.</description>
+    </key>
     <key name="info-history-graph-points" type="b">
       <default>true</default>
       <summary>Whether we should show the history data points</summary>
